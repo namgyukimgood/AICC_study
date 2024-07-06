@@ -1,0 +1,373 @@
+cp 실습문제
+
+	1. ~/test 디렉토리랑 ~/linux 디렉토리 생성
+		mkdir ~/test ~/linux
+
+	2. /etc/passwd를 ~/test디렉토리로 복사 하시오
+		cp /etc/passwd ~/test/
+
+	3. ~/test 디렉토리를 ~/linux 디렉토리로 복사하세요.
+		cp -r ~/test ~/linux
+
+	4. /etc/passwd를 ~/test디렉토리에 1이란 이름으로 복사하세요.
+		cp /etc/passwd ~/test/1
+
+	5. ~/test디렉토리 밑에 1과 passwd를 ~/linux디렉토리로 복사하세요.(한번에)
+		cp ./test/1 ./test/passwd ./linux/
+		cp ./test/{1,passwd} ./linux/
+
+	6. ~/test디렉토리에 2란 디렉토리를 생성하세요.
+		mkdir test/2
+
+	7. ~/test디렉토리 밑에 있는 것 전부를 ~/linux 디렉토리로 복사하세요.
+		cp -r ~/test/* ~/linux/
+
+	rm -rf 지울 대상
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. ~/mvtest 디렉토리와  ~/mvlinux 디렉토리를 생성하세요
+
+	mkdir ~/mvtest ~/mvlinux
+	
+2. /etc/passwd를 ~/mvtest 밑으로 복사하세요
+
+	cp /etc/passwd ~/mvtest
+
+3. ~/mvtest에 passwd를 ~/mvlinux로 이동하세요
+
+	mv ~/mvtest/passwd ~/mvlinux
+
+4. /etc/passwd를 ~/mvtest 밑으로 복사하세요
+
+	cp ~/etc/passwd ~/mvtest
+
+5. ~/mvtest에 passwd를 ~/mvlinux로 이동하세요 (덮어쓸꺼냐고 물어보면 n 누르세요)
+
+	mv ~/mvtest/passwd ~/mvlinux
+	no
+
+6. ~/mvtest에 passwd를 ~/mvlinux로 이동하세요. (-f 옵션사용)
+
+	mv -f ~/mvtest/passwd ~/mvlinux
+
+7. /etc/passwd를 ~/mvtest 밑으로 복사하세요
+
+	cp ~/etc/passwd ~/mvtest
+
+8. ~/mvtest밑에 있는 passwd를 -b옵션을 써서 ~/mvlinux에 이동하세요.
+
+	mv -b ~/mvtest/passwd ~/mvlinux
+
+	~가 붙은 백업파일이 생성된다.
+
+9. ~/mvlinux에 있는 passwd 파일의 이름을 1로 바꾸세요m
+
+	mv ~/mvlinux/passwd ~/mvlinux/1
+
+10. ~/mvlinux에 있는 1파일을 숨김파일로 만드세요
+
+	mv ~/mvlinux/1 ~/mvlinux/.1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. cat 명령어로 ~/cattest 파일에  1234 내용을 넣으세요.
+cat > ~/cattest
+1234
+컨트롤 + d
+
+2. ~/cattest의 파일 내용을 읽어보세요.
+cat ~/cattest
+
+3. ~/cattest의 내용을  ~/testcat으로 옮겨보세요. (Redirection 사용)
+cat ~/cattest > ~/testcat
+
+4. ~/testcat에 1234 내용을 추가하세요.
+cat >> ~/testcat
+1234
+컨트롤+d
+
+5. ~/cattest의 내용을 ~/testcat에 추가하세요.
+cat ~/cattest >> ~/testcat
+cat ~/testcat
+
+6. ~/testcat의 내용을 행번호와 같이 출력하세요.
+cat -n ~/testcat
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+작업 위치 : /backup/
+위 위치에서 vi 툴 실행.
+작업 위치 : ~/backup/
+위 위치에서 vi 툴 실행.(아래 예시)
+[tester@localhost ~]$ pwd
+/home/tester
+[tester@localhost ~]$ mkdir backup
+[tester@localhost ~]$ cd backup/
+[tester@localhost backup]$ 
+
+
+1. ~/backup/ 디렉터리  안에 있는 내용을 다 삭제하시오
+	:! rm ~/backup/*
+
+2. /etc/inittab, /etc/login.defs, /etc/passwd 파일을 ~/backup/ 디렉터리에 복사하시오
+	:! cp /etc/inittab /etc/login.defs /etc/passwd ~/backup
+
+3. ~/dir0/dir1/ 디렉터리 생성
+	:!mkdir -p ~/dir0/dir1
+
+4. ~/backup/ 안에 내용을 ~/dir0/dir1/ 로 복사
+	:!cp ~/backup/* ~/dir0/dir1
+
+5. ~/backup/login.defs 파일과 ~/dir0/dir1/passwd 파일을 merge 파일로 병합
+	:!cat ~/backup/login.defs ~/dir0/dir1/passwd > ./merge
+
+6. ~/dir0/dir1/login.defs 을 열어 PASS 를 STILL 로 치환
+	:e ~/dir0/dir1/login.defs
+	:%s/PASS/STILL/g
+	또는
+	:set nu
+	:1,72s/PASS/STILL/g
+
+7. login.defs 15줄 아래 ~/backup/ 디렉터리 목록 출력 내용 삽입
+	15번째 줄에서...o입력후 esc키 입력
+	:.!ls -l ~/backup
+
+8. login.defs 제일 마지막 줄에 /etc/passwd 내용 추가
+	:.!cat /etc/passwd
+
+9. 지금까지 작업 했던 내용을 ~/backup/testfile1으로 저
+	:w ~/backup/testfile1
+
+10. ~/backup/inittab 파일을 열어 16줄 아래 행 추가 후 hello world 입력
+	16번째 줄에서 o 입력 후 편집.
+
+11. 파일 저장 후 종료.
+	:wq
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+리눅스 기본 명령어
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+명령어
+command [옵션] [인자]
+
+pwd: 현재 디렉터리 확인
+
+cd: 디렉터리 변경(이동)
+	cd [옵션]
+	path: 이동할 디렉터리 경로
+	.: 현재 디렉터리
+	..: 상위 디렉터리
+	~: 로그인한 사용자의 홈 디렉터리
+
+ls: 디렉터리 목록 확인
+ls [옵션] [디렉터리/파일]
+	(dir)
+	-a: . 파일을 포함 모든 파일/디렉터리
+	-l: 자세하게
+	-d: 디렉터리 정보
+	-F: 파일 형식 표현
+
+cp: 파일/디렉터리 복사
+cp [옵션] [source] [target]
+	-r: 디렉터리 복사
+	-b: 중복 파일 존재 시 백업 파일 생성
+	-i: 중복 확인
+
+mkdir: 디렉터리 생성
+mkdir [경로]
+	-p: 상위 경로 자동 생성
+
+rmdir: 빈 디렉터리 삭제 (잘 사용하지 않음)
+
+rm: 파일/디렉터리 삭제
+rm [옵션] [대상 폴더/디렉터리]
+	-r: 디렉터리 삭제
+	-f: 강제 삭제
+
+mv: 파일/디렉터리 이동(잘라내기/붙여넣기)
+mv [옵션] [source] [target]
+	-b: 동일 이름의 파일 존재 하면 백업
+	-i: 동일 이름의 파일 존재 시 확인
+	-f: 동일 이름의 파일 존재 시 강제 덮어씀
+	-u: 동일 이름의 파일 존재 시 최신파일을 유지
+
+cat: 파일 내용을 표준 출력 장치로 출력
+cat [읽어들일 파일]
+
+	cat 그냥 실행하면 키보드로 입력받아 출력
+
+	출력 리다이렉트(출력의 방향을 변경)
+		 >(single): 새로 쓰기
+		>>(double): 추가 하기(없으면 새로 씀)
+
+	cat > ./memo
+	cat >> ./memo
+
+[추가 명령어]
+alias: 명령어에 별칭을 지정
+alias 별칭='명령어'
+
+source: 파일 내용 적용
+
+파일 내용 보기
+	head
+	tail
+	more
+
+파이프(|)
+	명령어의 출력을 다음 명령어의 입력으로
+
+grep [옵션] "찾을_문자열" 파일이름
+grep "hello" file.txt
+file.txt 파일에서 "hello"라는 단어가 포함된 모든 줄을 출력합니다
+
+echo 환경변수 출력
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+기타상황
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Ctrl + Alt +(F2~F7) 가상터미널로 전환
+Alt + F1 첫번째 가상 터미널로 전환, 돌아옴 
+
+Ctrl +shift+'+' 화면키우기 
+
+~ 사용자의 홈 디렉터리를 나타낸다 
+
+myClient01 
+아이디 tester 
+비밀번호 HOt$ix
+
+myServer01
+아이디 tester
+비밀번호 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+vi 사용법
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+VI 
+테스트 할 때는 /etc/passwd를 임의의 위치에 복사
+복사한 passwd를 vi로 열어 테스트!
+
+<명령모드>
+h에 검지 ~ 커서이동
+WORD단위 이동 ~ w, e, b
+0(zero) : 행의 처음
+$ : 행의 마지막
+G : 문서의 마지막으로
+gg: 문서의 처음으로
+x, X : 한 문자 삭제
+dd (숫자 + dd): 행 삭제
+yy (숫자 + yy): 행 복사
+p(다음), P(이전) : 붙여 넣기
+Ctrl+v : 단어 단위 블록 지정
+u : undo(실행전으로)
+Ctrl+r : redo(실행앞으로)
+
+<실행모드>
+/, ? : 색인모드(검색) n, N 으로 다음 이전 찾기
+
+문자 치환하기
+:[범위]s/찾을패턴/변경할패턴/[g]
+	범위는 n 혹은 n,m 혹은 % 를 넣을 수 있다
+	g 옵션을 주면 적용되는 라인의 모든 부분 변경
+	g 옵션을 주지 않으면 처음 찾은 부분만 변경
+
+:.!ls -l /home/ vi 편집기에서 명령 모드로 들어가서 :.!ls -l /home/ 
+명령을 실행하면, /home/ 디렉터리의 목록이 vi 편집기 화면에 출력됩니다.
+이 방법은 파일을 수정하지 않고 현재 화면에 명령어 결과를 출력할 때 유용합니다.
+
+:! [command] : shell에서 이번만 명령수행~
+:.! [commad] : shell에서 수행된 명령의 결과를 문서에 포함
+:e [filename] :파일 열기
+:enew : 현재문서 닫고 빈 문서 열기
+:q : 나가기(저장해야 동작)
+:q! : 저장하지 않고 나가기
+:w : 저장
+:wq : 저장하고 나가기
+:w >> [filename] : filename에 현재 문서내용 추가
+:f : 현재 문서의 정보 확인 
+:[n]r[filename] : filename의 내용을 n번째 행에 삽입
+:[n]r![command] : command결과를 n번째 행에 삽입
+기타 명령
+:set ts=n : 탭 사이즈 조절
+:set nu : 라인넘버 활성화
+:set nonu : 라인넘버 비활성화
+:nohi : 하이라이트 끄기
+:hi : 하이라이트 켜기
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+웹 서비스 구축 테스트
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+랜카드 설정 정보 확인
+ifconfig
+
+랜카드 활성화
+ifup ens33
+
+*********************************************
+** root 디렉토리로 가서 권한 얻는 법 ***
+su
+비밀번호
+*********************************************
+
+비활성화
+ifdown ens33
+
+웹 서비스 패키지 설치(Apache Web Server)
+#yum -y install httpd
+
+서비스 시작
+#systemctl start httpd.service
+
+포트 확인
+#netstat -atunp | grep httpd
+
+내부 로컬의 브라우저(Firefox)에서 접속 테스트
+http://localhost
+http://127.0.0.1
+http://자신의IP
+
+다음 테스트는 선택적으로 진행
+외부접속위한 방화벽 설정
+#firewall-cmd --permanent --zone=public --add-port=80/tcp
+랴
+#firewall-cmd --reload
+
+Host PC또는 통신 가능한 내부망의 다른 PC의 웹브라우저에서 접속 테스트(브릿지일 경우만 가능)
+http://localhost
+http://127.0.0.1
+http://자신의IP
+
+페이지 변경해보기
+[root@localhost tester]# vi /var/www/html/index.html
+[root@localhost tester]# vi /var/www/html/a.html
+
+[index.html]
+!DOCTYPE html>
+
+<html>
+<head><title>my site</title></head>
+<body>
+<h1>Welcome to mySite!!</h1>
+<a href='a.html' style='color: red;'>my info</a>
+</body>
+</html>
+
+[a.html]
+<!DOCTYPE html>
+<html>
+<head>
+<title>a</title>
+<style>
+#aa {
+        color: orange;
+}
+</style>
+</head>
+<body>
+a <span id='aa'>pa</span>ge~
+</body>
+</html>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+vim 에디터 사용법
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+명령모드에서 입력모드로 i,o,a 클릭 주로 i만 쓴다
+입력모드에서 명령모드로 ESC
+명령모드에서 실행모드로 ( :w 파일명 =저장하기,  :wq 파일명 =저장하고 나가기,  :q = 나가기 , :q! =저장 안하고 강제로 나가기 )
+실행모드에서 명령모드로 ESC 햇갈릴때는 ESC연타 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
